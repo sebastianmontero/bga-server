@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from langserve import add_routes
 from typing import Dict, Any
 from qdrant_client.http import models
-from search_success_videos.chain import chain as search_success_videos_chain
+from search_success_videos import get_industries, chain as search_success_videos_chain
+# from search_success_videos import get_industries
 from starlette.requests import Request
 
 app = FastAPI()
@@ -63,6 +64,9 @@ async def config_modifier(config: Dict[str, Any], req: Request) -> Dict[str, Any
 async def redirect_root_to_docs():
     return RedirectResponse("/docs")
 
+@app.get("/industries")
+async def get_industries_endpoint():
+    return {"industries": get_industries()}
 
 # Edit this to add the chain you want to add
 add_routes(

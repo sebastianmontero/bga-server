@@ -21,3 +21,22 @@ chain = qdrant_vector_store.as_retriever().configurable_fields(
         description="Set additional search parameters for the retriever",
     )
 )
+
+
+def get_industries() -> list[str]:
+    industries = set ()
+    offset = None
+    while True:
+        (points, offset) = client.scroll(collection_name="bga_success_stories", limit=1000, offset=offset)
+        for point in points:
+            # print(point)
+            industry = point.payload.get('metadata', {}).get('industry')
+            if industry:
+                industries.add(industry)
+
+        if not offset:
+            break
+    industries = list(industries)
+    industries.sort()
+    print(industries)
+    return industries
