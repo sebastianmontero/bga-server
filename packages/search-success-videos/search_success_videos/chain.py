@@ -1,12 +1,21 @@
+import os
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.runnables import ConfigurableField
 
+qdrant_api_key = os.getenv("QDRANT_API_KEY")
+# print("""QDRANT_API_KEY: """, qdrant_api_key)
+if not qdrant_api_key:
+    raise ValueError("QDRANT_API_KEY is not set")
+
+qdrant_url = os.getenv("QDRANT_CLUSTER_URL")
+if not qdrant_url:
+    raise ValueError("QDRANT_CLUSTER_URL is not set")
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 
-client = QdrantClient(path="/home/sebastian/qdrant-dbs/bga-success-stories")
+client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key, prefer_grpc=True)
 
 qdrant_vector_store = QdrantVectorStore(
     client=client,
