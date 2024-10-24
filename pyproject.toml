@@ -13,7 +13,9 @@ python = "^3.9,<4.0"
 uvicorn = "^0.23.2"
 langserve = {extras = ["server"], version = ">=0.0.30"}
 pydantic = ">=2.7.4,<3.0.0"
-search-success-videos = {path = "packages/search-success-videos", develop = true}
+search-success-videos = {path = "packages/search-success-videos"}
+# search-success-videos = {path = "packages/search-success-videos", develop = true}
+
 
 
 [tool.poetry.group.dev.dependencies]
