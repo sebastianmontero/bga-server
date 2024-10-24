@@ -2044,7 +2044,7 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "search-success-videos"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 category = "main"
 optional = false
